@@ -6,6 +6,7 @@ var sendMess = require('../sendEmail/sendEmail');
 var listOfRest = require('../models/listOfRest').listOfRest;
 var maps = require('../models/map').map;
 var User = require('../models/user').User;
+var comment  = require('../models/comment').comment;
 var BookOfSuggestion= require('../models/bookOfSuggestion').BookOfSuggestion;
 var mongoose = require('../libs/mongoose');
 
@@ -74,22 +75,61 @@ router.post('/addRest', function(req,res){
 	res.redirect('/');
 });
 
-router.get("/rests/:name", function(req,res){
+router.post('/addComment/:restName', function(req,res,next ){
+	async.parallel([
+	function(callback){
+		var com = new comment({
+		nameFrom:req.body.nameFrom,
+		text:req.body.text,
+		restName: req.params.restName 
+		});
+		com.save(function(err, com){
+			if(err) throw err;
+			callback(err,com);
+		});	
+	},
+	function(callback){
+		listOfRest.findOne({name:req.params.restName},function(err , onerest){
+			callback(err,onerest);
+		});
+	},
+	function(callback){
+		maps.findOne({name:req.params.restName}, function(err,coor){
+			callback(err,coor);
+		});
+	},
+	function(callback){
+		setTimeout( function(){
+			comment.find({restName:req.params.restName}, function(err , comments){
+				callback(err,comments);
+			})},100);
+
+	}
+	], function(err,results){
+		res.render('concreteRest.ejs', {rest: results[1] , coor: results[2] , comments :results[3]});
+	});
+});
+
+
+router.get("/rests/:name", function(req,res ){
 	async.parallel([
 		function(callback){
 			listOfRest.findOne({name:req.params.name},function(err , onerest){
-				var oneRest=onerest;
-				callback(err,oneRest);
+				callback(err,onerest);
 			});
 		},
 		function(callback){
 			maps.findOne({name:req.params.name}, function(err,coor){
-				var Coor=coor;
-				callback(err,Coor);
+				callback(err,coor);
+			});
+		},
+		function(callback){
+			comment.find({restName:req.params.name}, function(err , comments){
+				callback(err,comments);
 			});
 		}
 		], function(err,results){
-			res.render('concreteRest.ejs', {rest: results[0] , coor: results[1]});
+			res.render('concreteRest.ejs', {rest: results[0] , coor: results[1] , comments :results[2]});
 		});
 });
 router.post("/login" , function(req,res){

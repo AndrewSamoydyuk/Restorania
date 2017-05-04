@@ -12,7 +12,7 @@
 		<!-- BG -->
 		<a onclick="javascript:history.back();"><div class="arrowBack"></div></a>
 		<div id="concDiv">
-			<div class="bookDiv">
+			<div class="bookDivimg">
 				<img class="bookImg" src=<%=rest.imgUrl%>>
 			</div>
 			<div class="aboutConcRest">
@@ -30,7 +30,55 @@
 					<br>
 			</div>
 			<div id="map"> </div>
+			<!-- Tables -->
 			<hr class="horLine">
+			<p class="aboutRest restName" > Available tables </p>
+			<br>
+			<div class="tables">
+				<img class="tableImg" src="/images/table.png">
+			</div>
+			<div class="tables">
+				<img class="tableImg" src="/images/table.png">
+			</div>
+			<div class="tables">
+				<img class="tableImg" src="/images/table.png">
+			</div>
+			<div class="tables">
+				<img class="tableImg" src="/images/table.png">
+			</div>
+			<div class="tables">
+				<img class="tableImg" src="/images/table.png">
+			</div>
+			<!-- Comments -->
+			<br>
+			<br>
+			<hr class="horLine">
+			<p class="aboutRest restName" > Comments </p>
+			<form method="post" action="/addComment/<%=rest.name%>">
+				<div class="SignInFields">
+					<label for="name">Your  name</label>
+					<input type="text" name="nameFrom" id="name" />
+				</div>
+				<br>
+				<div >
+					<label for="name">Text</label>
+					<input class="comentText"  type="text" name="text" id="name" />
+				</div>
+				<ul class="actions">
+					<li><input type="submit" value="Add comment"/></li>
+				</ul>
+			</form>
+			<% if (comments) { %>
+				<%for(var k = comments.length-1;k>=0 ;k--){%>
+					<div class="comment">
+						<p> From : <%=comments[k].nameFrom%></p>
+						<p> Text :</p>
+						<p><%=comments[k].text%></p>
+						<p><%=comments[k].date.getFullYear()+"-"+  comments[k].date.getMonth()+"-"+comments[k].date.getDate() + "  "+ comments[k].date.getHours() + ":"+comments[k].date.getMinutes()%></p>
+					</div>
+				<%}%>
+			<%}%>
+			<br>
 		</div>	
 		<script src = "https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDEgQ6QLmnJC2yFtTfnf0AlcXRUEwTlfFA"></script>
       	<script>

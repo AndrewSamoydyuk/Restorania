@@ -1607,6 +1607,14 @@
 .bookDiv:hover{
 	 box-shadow:0 0 10px #ffff00;
 }
+.bookDivimg{
+	border: 2px solid white;
+	border-radius: 10px;
+	width: 346px;
+	display: inline-block;
+	margin-right: 50px;
+	margin-bottom: 50px;
+}
 .bookImg{
 	padding: 4px;
 	border-radius: 20px;
@@ -1722,4 +1730,38 @@
 }
 .menuForm{
 	display: none;
+}
+.addRestInput{
+	display: inline-block !important;
+	margin: 5px !important;
+	width: 300px !important;
+}
+.addRestForm{
+	margin: 20px ;
+}
+.tableImg{
+	width: 270px;
+	height: 270px;
+}
+.tables{
+	width: 270px;
+	height: 270px;
+	border: 2px solid white;
+	border-radius: 10px;
+	margin: 10px;
+	display: inline-block;
+}
+.tables:hover{
+	box-shadow:0 0 10px #ffff00;
+	cursor: pointer;
+}
+.comentText{
+	width: 80% !important;
+	height: 100px !important ;
+}
+.comment{
+	margin:  20px;
+	padding: 10px;
+	border: 2px solid white;
+	border-radius: 10px;
 }
