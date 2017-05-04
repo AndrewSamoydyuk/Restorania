@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>myProject</title>
+		<meta charset="utf-8" />
+		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+		<link rel="stylesheet" href="/assets/css/main.css">
+	</head>
+	<body>
+		<!-- Wrapper -->
+			<form method="post" action="/logout" id="formLogout" class="menuForm">
+			</form>
+			<form method="get" action="/addRest" id="formAdd" class="menuForm">
+			</form>
+
+			<div id="wrapper">
+			<div id="menu">
+				<p class="userName"> 
+				<%if(user){%>
+				 Hello  , <%=user.get('username')%>
+				<%}%>					
+				</p>
+
+				<%if(user){%>
+					<a class="menuElment" href="" onClick="document.getElementById('formLogout').submit(); return false;"> Sign Out </a>
+
+					<a class="menuElment" href="" onClick="document.getElementById('formAdd').submit(); return false;"> Add </a>
+
+
+					<%} else { %>
+					<a class="menuElment"href="#SignIn">Sign In</a>
+                <%} %>
+				
+			</div>
+				<!-- Header -->
+					<header id="header">
+						<div class="logo">
+							<span class="icon fa-plug"></span>
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h1><img src="/images/logo.png"></h1>
+								<!-- <p>Here you can book a table  -->
+								<!-- <br />  -->
+								</p>
+							</div>
+						</div>
+						<nav>
+							<ul>
+								<li><a href="#book">Book</a></li>
+								<li><a href="#search">Search</a></li>
+								<li><a href="#contact">Contact</a></li>
+							</ul>
+						</nav>
+					</header>
+				<!-- Main -->
+					<div id="main">  
+						<!-- Sign In -->
+							<article id="SignIn">
+								<h2 class="major">Sign In</h2>
+								<form method="post" action="/login">
+
+									<div class="SignInFields">
+										<label for="name">Name</label>
+										<input type="text" name="username" id="name" />
+									</div>
+									<br>
+									<div class="SignInFields">
+										<label for="name">Password</label>
+										<input type="password" type="text" name="password" id="name" />
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Sign In"/></li>
+									</ul>
+								</form>
+							</article>
+						<!-- book -->
+							<article id="book" class="maindiv">
+								<h2 class="major">List of restaurants</h2>	
+								<%for(var k=0;k< rest.length;k++){%>	
+								<a class="divLink" href="/rests/<%= rest[k].name%>">
+									<div class="bookDiv"><img class="bookImg" src=<%=rest[k].imgUrl%>>
+									<h3 class="bookName"><%= rest[
+									k].name%></h3>
+									<p class="rate">Rating : <%for(var i=0;i< rest[k].rate;i++){%><span style="color: yellow;">&#9734;</span>
+									<%}%><%for(var j=0;j<(5-rest[k].rate);j++){%>
+										<span>&#9734;</span>   
+									<%}%>	
+									</p>
+									<hr class="horLine">
+									<p class="aboutRest">Work time : <%= rest[k].workTime%></p>
+									<p class="aboutRest">Average check : <%= rest[k].averageCheck%></p>
+									<p class="aboutRest">Cuisine : <%= rest[k].food%></p>
+									</div>
+								</a>
+								<%}%>
+													 
+							</article>
+
+						<!-- search -->
+							<article id="search">
+								<h2 class="major">Search</h2>
+							</article>
+						<!-- Contact -->
+							<article id="contact">
+								<h2 class="major">Contact</h2>
+								<form method="post" action="/">
+									<div class="field half first">
+										<label for="name">Name</label>
+										<input type="text" name="name" id="name" />
+									</div>
+									<br><br>
+									<br><br>
+									<div class="field">
+										<label for="message">Message</label>
+										<textarea name="message" id="message" rows="4"></textarea>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Send Message"/></li>
+										<li><input type="reset" value="Reset" /></li>
+									</ul>
+								</form>
+							</article>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; Ukraine. Design:<a href="https://vk.com/id210434338">Andrew Samoydyuk</a></p>
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg">
+			</div>
+
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/skel.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/assets/js/main.js"></script>
+	</body>
+</html>

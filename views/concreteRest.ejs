@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>myProject</title>
+		<meta charset="utf-8" />
+		<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+		<link rel="stylesheet" href="/assets/css/main.css">
+		<style type="text/css"></style>
+	</head>
+	<body id="body2" onload = "loadMap()">
+		<!-- BG -->
+		<a onclick="javascript:history.back();"><div class="arrowBack"></div></a>
+		<div id="concDiv">
+			<div class="bookDiv">
+				<img class="bookImg" src=<%=rest.imgUrl%>>
+			</div>
+			<div class="aboutConcRest">
+				<p class="aboutRest restName" ><%=rest.name%> <a class="divLink" href="#" onclick="openbox('map'); return false"> <span style class="mapMarker icon fa-map-marker"></span></a></p>
+				<p class="rate">Rating : <%for(var i=0;i< rest.rate;i++){%>
+				<span style="color: yellow;">&#9734;</span>
+					<%}%><%for(var j=0;j<(5-rest.rate);j++){%>
+					<span>&#9734;</span>   
+				<%}%>	
+				</p>
+				<p class="aboutRest">Work time : <%= rest.workTime%></p>
+				<p class="aboutRest">Average check : <%= rest.averageCheck%></p>
+				<p class="aboutRest">Cuisine : <%= rest.food%></p>
+					<br>
+					<br>
+			</div>
+			<div id="map"> </div>
+			<hr class="horLine">
+		</div>	
+		<script src = "https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDEgQ6QLmnJC2yFtTfnf0AlcXRUEwTlfFA"></script>
+      	<script>
+		      function loadMap() {
+			
+            var mapOptions = {
+               center:new google.maps.LatLng(<%-coor.x%>,<%-coor.y%>),
+               zoom:12
+            }
+				
+            var map = new google.maps.Map(document.getElementById("map"),mapOptions);
+            
+            var marker = new google.maps.Marker({
+               position: new google.maps.LatLng(<%-coor.x%>,<%-coor.y%>),
+               map: map,
+            });
+
+            marker.setMap(map);
+
+            var infowindow = new google.maps.InfoWindow({
+               content: "<%-rest.name%>"
+            });
+				
+            infowindow.open(map,marker);
+         }
+      	</script>
+      	<script type="text/javascript">
+      		function openbox(id){
+			    display = document.getElementById(id).style.visibility;
+			    if( display=='visible'){
+			       document.getElementById(id).style. visibility='hidden';
+			    }else{
+			       document.getElementById(id).style. visibility='visible';
+			    }
+			}
+      	</script>
+	</body>
+</html>
