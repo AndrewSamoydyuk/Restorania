@@ -1765,3 +1765,26 @@
 	border: 2px solid white;
 	border-radius: 10px;
 }
+.RegForm{
+	width: 400px !important;
+	margin: 200px;
+	margin-left: 500px;
+	border: 2px solid white;
+	border-radius: 10px;
+}
+.LinkTime{
+	width: 130px;
+	height: 50px;
+	padding: 10px;
+	margin: 10px;
+	display: inline-block;
+	border: 2px solid white;
+	border-radius: 5px;
+}
+/*#cancelBooking{
+	display: none;
+	width: 300px;
+	height: 300px;
+	border: 2px solid white;
+	border-radius: 5px;
+}*/

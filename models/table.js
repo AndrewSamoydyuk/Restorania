@@ -3,22 +3,43 @@ var mongoose = require('mongoose'),
 
 mongoose.Promise = global.Promise;
 
-var schema = new Schema({	
-		available:{
-			type: Boolean
+var schema = new Schema({
+		tableNumber :{
+			type: String
+		},	
+		availableFirst:{
+			type :String
+		},
+		codeFirst:{
+			type : String
+		},
+		clientNameFirst:{
+			type : String
+		},
+		availableSecond:{
+			type :String
+		},
+		codeSecond:{
+			type : String
+		},
+		clientNameSecond:{
+			type : String
+		},
+		availableThird:{
+			type :String
+		},
+		codeThird:{
+			type : String
+		},
+		clientNameThird:{
+			type : String
 		},
 		restName:{
 			type:String
 		},
-		clientName:{
-			type:String
-		},
 		numberOfSeats :{
-			type : String
-		},
-		code : {
 			type : String
 		}
 	});
 
-exports.Table = mongoose.model('table',schema);
+exports.table = mongoose.model('table',schema);

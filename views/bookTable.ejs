@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>addRest</title>
+		<meta charset="utf-8" />
+		<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+		<link rel="stylesheet" href="/assets/css/main.css">
+	</head>
+	<body>
+		<div class="RegForm">
+			<form  class="addRestForm" method="post" action="/bookTable/<%=restName%>/<%=tableNumber%>/<%=time%>">
+				<p> Your name </p>
+				<input  class="addRestInput" type="text" name="clientName">
+				<p> Your phone number </p>
+				<input  class="addRestInput" required pattern="^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$" type="text" name="phone">
+				<input type="submit" value="Book">
+			</form>
+		</div>
+	</body>
+</html>

@@ -10,7 +10,8 @@
 	</head>
 	<body id="body2" onload = "loadMap()">
 		<!-- BG -->
-		<a onclick="javascript:history.back();"><div class="arrowBack"></div></a>
+		<!-- <a onclick="javascript:history.back();"><div class="arrowBack"></div></a> -->
+		<a href="/"><div class="arrowBack"></div></a>
 		<div id="concDiv">
 			<div class="bookDivimg">
 				<img class="bookImg" src=<%=rest.imgUrl%>>
@@ -34,21 +35,38 @@
 			<hr class="horLine">
 			<p class="aboutRest restName" > Available tables </p>
 			<br>
-			<div class="tables">
-				<img class="tableImg" src="/images/table.png">
+				<div class="LinkTime">
+					<a class="divLink" href="/rests/<%=rest.name%>/first"> 21 : 00 - 00 :00</a>			
+				</div>
+				<div class="LinkTime">
+					<a class="divLink" href="/rests/<%=rest.name%>/second"> 18 : 00 - 21 :00</a>
+				</div>
+				<div class="LinkTime">
+					<a class="divLink" href="/rests/<%=rest.name%>/third"> 15 : 00 - 18:00</a>
+				</div>
+				<div class="LinkTime"> 
+					<a href="#book">Book</a>
+					 <!-- <a   class="divLink" href="#" onclick="openbox('cancelBooking'); return false">Cancel booking</a>						 -->
+				</div>
+			<div id="cancelBooking">
+				edfgdfgfdg
 			</div>
-			<div class="tables">
-				<img class="tableImg" src="/images/table.png">
-			</div>
-			<div class="tables">
-				<img class="tableImg" src="/images/table.png">
-			</div>
-			<div class="tables">
-				<img class="tableImg" src="/images/table.png">
-			</div>
-			<div class="tables">
-				<img class="tableImg" src="/images/table.png">
-			</div>
+			<br>
+
+			<% if (tables) { %>
+			<% if (!(tables.length===0)) { %>
+				<%for(var k = 0 ;k < tables.length ;k++){%>
+				<a class="divLink" href="/bookTable/<%=tables[k].restName%>/<%=tables[k].tableNumber%>/<%=time%>">
+					<div class="tables">
+						<p> <%=tables[k].tableNumber%> </p>
+						<img class="tableImg" src="/images/table.png">
+					</div>
+				</a>	
+				<%}%>	
+			<%}else {%>
+				<p class="aboutRest restName" > There are no available tables </p>
+			<%}%>
+			<%}%>	
 			<!-- Comments -->
 			<br>
 			<br>
@@ -79,7 +97,8 @@
 				<%}%>
 			<%}%>
 			<br>
-		</div>	
+			</div>	
+
 		<script src = "https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDEgQ6QLmnJC2yFtTfnf0AlcXRUEwTlfFA"></script>
       	<script>
 		      function loadMap() {
@@ -115,5 +134,15 @@
 			    }
 			}
       	</script>
+      	<script type="text/javascript">
+			function openbox(id){
+			    display = document.getElementById(id).style.display;
+			    if(display=='none'){
+			       document.getElementById(id).style.display='inline-block';
+			    }else{
+			       document.getElementById(id).style.display='none';
+			}
+		</script>
+
 	</body>
 </html>
