@@ -12,10 +12,9 @@ var comment  = require('../models/comment').comment;
 var BookOfSuggestion= require('../models/bookOfSuggestion').BookOfSuggestion;
 var mongoose = require('../libs/mongoose');
 
-
 router.get('/', function(req, res) {
   	listOfRest.find( function(err , restaurants){
-		res.render('index.ejs',{rest : restaurants } );
+		res.render('index.ejs',{rest : restaurants , found : null} );
 	});
 });
 
@@ -46,9 +45,33 @@ router.post('/', function(req, res) {
 	});
 });
 
+router.post('/findByName', function(req, res) {
+	listOfRest.find({name:req.body.restName},function(err , onerest){
+		listOfRest.find( function(err , restaurants){
+			res.render('index.ejs',{ rest : restaurants , found : onerest } );
+		});
+	});	
+});
+
+router.post('/findByCheck', function(req, res) {
+	listOfRest.find( function(err , restaurants){
+		var Found =[]; 
+		for (var i = 0; i <restaurants.length; i++) {
+			if (+restaurants[i].averageCheck > +req.body.check) {
+				Found.push(restaurants[i]);
+			}
+		}
+		listOfRest.find( function(err , restaurants){
+			res.render('index.ejs',{ rest : restaurants , found : Found } );
+		});
+	});		
+});
+
 router.get('/addRest',function(req,res){
 	if (req.user) {
-		res.render('addRest.ejs');
+		listOfRest.find( function(err , restaurants){
+			res.render('addRest.ejs',{ rest : restaurants } );
+		});
 	}else{
 		res.send(403);
 	}
@@ -77,20 +100,19 @@ router.post('/addRest', function(req,res){
 	res.redirect('/');
 });
 
-router.get('/tables' , function(req,res){
+router.post('/addTable' , function(req,res){
 	var tabl = new table({
-		tableNumber: "3",
-		restName : "Rest2",
-		numberOfSeats : "3",
+		tableNumber: req.body.tableNumber,
+		restName : req.body.restName,
+		numberOfSeats : req.body.numberOfSeats,
 		availableFirst : true,
 		availableSecond : true,
 		availableThird : true
 	});
 	tabl.save(function(err, table){
 		if(err) throw err;
-		console.log(table);
+		res.redirect('/');
 	});	
-	res.end();
 });
 // router.get('/uptable' , function(req,res){
 // 	table.findOne({tableNumber: "2"}, function(err,table){

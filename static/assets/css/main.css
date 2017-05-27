@@ -1781,10 +1781,16 @@
 	border: 2px solid white;
 	border-radius: 5px;
 }
-/*#cancelBooking{
-	display: none;
-	width: 300px;
-	height: 300px;
-	border: 2px solid white;
-	border-radius: 5px;
-}*/
+.divsearch{
+	width: 500px;
+	padding: 20px;
+	display: inline-block;
+	margin-right: 50px;
+}
+#searchInput{
+	float: left;
+	width: 250px;
+}
+#searchBut{
+	margin-left: 20px;
+}

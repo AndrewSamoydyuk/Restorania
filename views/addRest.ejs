@@ -26,6 +26,21 @@
 		<p> CoorY</p>
 		<input class="addRestInput"  type="text" name="y">
 		<input type="submit" value="add">
+	</form>	
+	<h1>Add new Table</h1>
+	<form  class="addRestForm" method="post" action="/addTable">
+		<p> TableNumber</p>
+		<input  class="addRestInput" type="text" name="tableNumber">
+		<p>RestName</p>
+		<select class="addRestInput" name="restName" size="1"> 
+			<%for(var k=0;k< rest.length;k++){%>	
+				<option value="<%= rest[k].name%>"><%= rest[k].name%></option>
+			<%}%>
+		</select>
+		<!-- <input class="addRestInput"  type="text" name="restName"> -->
+		<p>NumberOfSeats</p>
+		<input class="addRestInput"  type="text" name="numberOfSeats">
+		<input type="submit" value="add">
 	</form>
 	</body>
 </html>

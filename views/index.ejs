@@ -90,17 +90,49 @@
 									</p>
 									<hr class="horLine">
 									<p class="aboutRest">Work time : <%= rest[k].workTime%></p>
-									<p class="aboutRest">Average check : <%= rest[k].averageCheck%></p>
+									<p class="aboutRest">Average check : <%= rest[k].averageCheck%>$</p>
 									<p class="aboutRest">Cuisine : <%= rest[k].food%></p>
 									</div>
 								</a>
 								<%}%>
 													 
 							</article>
-
 						<!-- search -->
-							<article id="search">
-								<h2 class="major">Search</h2>
+							<article id="search" class="maindiv">
+								<h2 class="major">Search</h2>	
+									<div class="divsearch">
+										<form  method="post" action="/findByName">
+											<label for="name">Name</label>
+											<input id="searchInput" list="rests" type="text" name="restName" id="name" />
+											<input id="searchBut"  type="submit" value="Find by name">
+										</form>
+									</div>	
+									<div class="divsearch">
+										<form   method="post" action="/findByCheck">
+											<label for="name">Average check more then :</label>
+											<input id="searchInput"  type="text" name="check" id="name" />
+											<input id="searchBut" type="submit" value="Find by check">
+										</form>		
+									</div>								
+								<hr class="horLine">
+								<%if(found){%>							
+								<%for(var k=0;k< found.length;k++){%>	
+								<a class="divLink" href="/rests/<%= rest[k].name%>/first">
+									<div class="bookDiv"><img class="bookImg" src=<%=found[k].imgUrl%>>
+									<h3 class="bookName"><%= found[k].name%></h3>
+									<p class="rate">Rating : <%for(var i=0;i< found[k].rate;i++){%><span style="color: yellow;">&#9734;</span>
+									<%}%><%for(var j=0;j<(5-found[k].rate);j++){%>
+										<span>&#9734;</span>   
+									<%}%>	
+									</p>
+									<hr class="horLine">
+									<p class="aboutRest">Work time : <%= found[k].workTime%></p>
+									<p class="aboutRest">Average check : <%= found[k].averageCheck%>$</p>
+									<p class="aboutRest">Cuisine : <%= found[k].food%></p>
+									</div>
+								</a>
+								<%}%>
+								<%}%>
 							</article>
 						<!-- Contact -->
 							<article id="contact">
@@ -130,7 +162,12 @@
 					</footer>
 
 			</div>
-
+			<datalist id="rests">
+				<%for(var k=0;k< rest.length;k++){%>	
+				<option value="<%= rest[k].name%>"><%= rest[k].name%>
+				</option>
+				<%}%>
+			</datalist>
 		<!-- BG -->
 			<div id="bg">
 			</div>
