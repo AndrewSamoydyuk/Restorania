@@ -10,26 +10,17 @@ var schema = new Schema({
 		availableFirst:{
 			type :String
 		},
-		codeFirst:{
-			type : String
-		},
 		clientNameFirst:{
 			type : String
 		},
 		availableSecond:{
 			type :String
 		},
-		codeSecond:{
-			type : String
-		},
 		clientNameSecond:{
 			type : String
 		},
 		availableThird:{
 			type :String
-		},
-		codeThird:{
-			type : String
 		},
 		clientNameThird:{
 			type : String

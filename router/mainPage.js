@@ -129,6 +129,35 @@ router.get('/bookTable/:restName/:tableNumber/:time' , function(req,res){
 	res.render('bookTable.ejs' , {restName :req.params.restName , tableNumber :req.params.tableNumber , time :  req.params.time});
 });
 
+router.get('/cancelBooking/:restName' , function(req,res){
+	res.render('cancelBooking.ejs' , { restName :req.params.restName });
+});
+
+router.post('/cancelBooking/:restName' , function(req,res){
+	table.find({restName:req.params.restName},function(err , tables){
+		for (var i = 0; i <tables.length; i++) {
+			if (tables[i].clientNameFirst===req.body.clientName) {
+	 			table.update({restName : req.params.restName , clientNameFirst : req.body.clientName},
+	 			{$set:{availableFirst:true}},function(err,res){
+	 				if (err) throw err;
+	 			})
+
+			}else if (tables[i].clientNameSecond===req.body.clientName) {
+				table.update({restName : req.params.restName , clientNameSecond : req.body.clientName},
+	 			{$set:{availableSecond:true}},function(err,res){
+	 				if (err) throw err;
+	 			})
+			}else if (tables[i].clientNameThird===req.body.clientName) {
+				table.update({restName : req.params.restName , clientNameThird : req.body.clientName},
+	 			{$set:{availableThird:true}},function(err,res){
+	 				if (err) throw err;
+	 			})
+			}
+		}
+	});	
+	 res.redirect('/#book');
+});
+
 router.post('/bookTable/:restName/:tableNumber/:time' , function(req,res){
 
 	table.findOne({tableNumber: req.params.tableNumber , restName : req.params.restName}, function(err,table){
@@ -144,7 +173,6 @@ router.post('/bookTable/:restName/:tableNumber/:time' , function(req,res){
 	}
 	table.save(function(err, table){
 		if(err) throw err;
-		console.log(table);
 	});	
 
 	var client = new clients({
@@ -154,7 +182,6 @@ router.post('/bookTable/:restName/:tableNumber/:time' , function(req,res){
 	});
 	client.save(function(err,client){
 		if(err) throw err;
-		console.log(client);
 	});
 
 	});

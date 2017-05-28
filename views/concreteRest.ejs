@@ -36,20 +36,17 @@
 			<p class="aboutRest restName" > Available tables </p>
 			<br>
 				<div class="LinkTime">
-					<a class="divLink" href="/rests/<%=rest.name%>/first"> 21 : 00 - 00 :00</a>			
+					<a class="divLink" href="/rests/<%=rest.name%>/first">15 : 00 - 18:00 </a>			
 				</div>
 				<div class="LinkTime">
 					<a class="divLink" href="/rests/<%=rest.name%>/second"> 18 : 00 - 21 :00</a>
 				</div>
 				<div class="LinkTime">
-					<a class="divLink" href="/rests/<%=rest.name%>/third"> 15 : 00 - 18:00</a>
+					<a class="divLink" href="/rests/<%=rest.name%>/third">21 : 00 - 00 :00 </a>
 				</div>
 				<div class="LinkTime"> 
-					<a href="#book">Cancel booking</a>					 
+					<a href="/cancelBooking/<%=rest.name%>">Cancel booking</a>					 
 				</div>
-			<div id="cancelBooking">
-				edfgdfgfdg
-			</div>
 			<br>
 
 			<% if (tables) { %>
@@ -58,6 +55,7 @@
 				<a class="divLink" href="/bookTable/<%=tables[k].restName%>/<%=tables[k].tableNumber%>/<%=time%>">
 					<div class="tables">
 						<p> <%=tables[k].tableNumber%> </p>
+						<p class="aboutRest">Number of seats: <%=tables[k].numberOfSeats%></p>
 						<img class="tableImg" src="/images/table.png">
 					</div>
 				</a>	
